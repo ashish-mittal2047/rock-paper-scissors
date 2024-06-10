@@ -7,6 +7,12 @@ function getHumanChoice() {
   return humanChoiceCapitalized;
 }
 
+function getComputerChoice() {
+  let possibleChoices = ["Rock", "Paper", "Scissors"];
+  let computerChoice = possibleChoices[Math.floor(Math.random() * 3)];
+  return computerChoice;
+}
+
 function playGame() {
   let numOfRounds = 5;
   for (let i = 0; i < numOfRounds; i++) {
