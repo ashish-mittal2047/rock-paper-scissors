@@ -13,6 +13,56 @@ function getComputerChoice() {
   return computerChoice;
 }
 
+function playRound(humanChoice, computerChoice) {
+  let roundWinner;
+  if (humanChoice === "Rock") {
+    if (computerChoice === "Rock") {
+    }
+    else if (computerChoice === "Paper") {
+      roundWinner = "Computer";
+      computerScore++;
+    }
+    else {
+      roundWinner = "You";
+      humanScore++;
+    }
+  }
+  else if (humanChoice === "Paper") {
+    if (computerChoice === "Rock") {
+      roundWinner = "You";
+      humanScore++;
+    }
+    else if (computerChoice === "Paper") {
+    }
+    else {
+      roundWinner = "Computer";
+      computerScore++;
+    }
+  }
+  else if (humanChoice === "Scissors") {
+    if (computerChoice === "Rock") {
+      roundWinner = "Computer";
+      computerScore++;
+    }
+    else if (computerChoice === "Paper") {
+      roundWinner = "You";
+      humanScore++;
+    }
+    else {
+    }
+  }
+  else {
+    console.log("Invalid Input! Moving on to the next round!");
+    return;
+  }
+  if (roundWinner) {
+    console.log(`${roundWinner} won this round!`);
+  }
+  else {
+  }
+
+}
+
 function playGame() {
   let numOfRounds = 5;
   for (let i = 0; i < numOfRounds; i++) {
