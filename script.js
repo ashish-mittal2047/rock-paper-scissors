@@ -1,6 +1,12 @@
 let humanScore = 0;
 let computerScore = 0;
 
+function getHumanChoice() {
+  let humanChoice = prompt("Please enter your choice among Rock, Paper and Scissors!");
+  humanChoiceCapitalized = humanChoice.slice(0, 1).toUpperCase() + humanChoice.slice(1).toLowerCase();
+  return humanChoiceCapitalized;
+}
+
 function playGame() {
   let numOfRounds = 5;
   for (let i = 0; i < numOfRounds; i++) {
