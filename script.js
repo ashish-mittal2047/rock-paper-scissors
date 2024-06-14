@@ -105,12 +105,18 @@ function playRound(playerChoice, computerChoice) {
   computerScoreDisplay.textContent = `Computer: ${computerScore}`;
 
   if (playerScore === 5) {
-    alert('Congratulations! You are the overall winner!');
-    location.reload();
+    setTimeout(() => {
+      alert('Congratulations! You are the overall winner!');
+      location.reload();
+    }, 0);
+
   }
   else if (computerScore === 5) {
-    alert('Sorry! You lost.');
-    location.reload();
+    setTimeout(() => {
+      alert('Sorry! You lost.');
+      location.reload();
+    }, 0);
+
   }
 }
 
