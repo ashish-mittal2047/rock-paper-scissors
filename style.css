@@ -15,6 +15,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   padding: 10px;
+  font-weight: 700;
 }
 
 .heading div {
@@ -60,6 +61,7 @@ body {
 
 .choice-score-display div {
   margin: 20px 50px;
+  /*width: 100px;*/
 }
 
 .player-choice-display,
@@ -74,6 +76,7 @@ body {
 .computer-score-display {
   font-size: 36px;
   text-align: centers;
+  text-wrap: nowrap;
 }
 
 

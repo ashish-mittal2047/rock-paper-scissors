@@ -1,10 +1,27 @@
-let humanScore = 0;
+let playerScore = 0;
 let computerScore = 0;
 
-function getHumanChoice() {
-  let humanChoice = prompt("Please enter your choice among Rock, Paper and Scissors!");
-  humanChoiceCapitalized = humanChoice.slice(0, 1).toUpperCase() + humanChoice.slice(1).toLowerCase();
-  return humanChoiceCapitalized;
+function emojiToChoice(unicodeString) {
+  console.log(unicodeString);
+  switch (unicodeString) {
+    case '✊':
+      return 'Rock';
+    case '✋':
+      return 'Paper';
+    case '✌':
+      return 'Scissors';
+  }
+}
+
+function choiceToEmoji(choice) {
+  switch (choice) {
+    case 'Rock':
+      return '✊';
+    case 'Paper':
+      return '✋';
+    case 'Scissors':
+      return '✌';
+  }
 }
 
 function getComputerChoice() {
@@ -13,68 +30,98 @@ function getComputerChoice() {
   return computerChoice;
 }
 
-function playRound(humanChoice, computerChoice) {
+function playRound(playerChoice, computerChoice) {
   let roundWinner;
-  if (humanChoice === "Rock") {
+  const playerChoiceDisplay = document.querySelector('.player-choice-display span');
+  const computerChoiceDisplay = document.querySelector('.computer-choice-display span');
+
+  playerChoiceDisplay.textContent = choiceToEmoji(playerChoice);
+  computerChoiceDisplay.textContent = choiceToEmoji(computerChoice);
+
+  const messageFirstLine = document.querySelector('.message-box .line-1');
+  const messageSecondLine = document.querySelector('.message-box .line-2');
+
+  const messageFirstLineList = ["You won!", "You lost!", "It's a tie!"];
+  const messageSecondLineList = ["Rock breaks the Scissor", "Scissor cuts the Paper", "Paper wraps the Rock", `${playerChoice} ties with ${computerChoice}`];
+
+  if (playerChoice === "Rock") {
     if (computerChoice === "Rock") {
+      messageSecondLine.textContent = messageSecondLineList[3];
     }
     else if (computerChoice === "Paper") {
       roundWinner = "Computer";
+      messageSecondLine.textContent = messageSecondLineList[2];
       computerScore++;
     }
     else {
       roundWinner = "You";
-      humanScore++;
+      messageSecondLine.textContent = messageSecondLineList[0];
+      playerScore++;
     }
   }
-  else if (humanChoice === "Paper") {
+  else if (playerChoice === "Paper") {
     if (computerChoice === "Rock") {
       roundWinner = "You";
-      humanScore++;
+      messageSecondLine.textContent = messageSecondLineList[2];
+      playerScore++;
     }
     else if (computerChoice === "Paper") {
+      messageSecondLine.textContent = messageSecondLineList[3];
     }
     else {
       roundWinner = "Computer";
+      messageSecondLine.textContent = messageSecondLineList[1];
       computerScore++;
     }
   }
-  else if (humanChoice === "Scissors") {
+  else if (playerChoice === "Scissors") {
     if (computerChoice === "Rock") {
       roundWinner = "Computer";
+      messageSecondLine.textContent = messageSecondLineList[0];
       computerScore++;
     }
     else if (computerChoice === "Paper") {
       roundWinner = "You";
-      humanScore++;
+      messageSecondLine.textContent = messageSecondLineList[1];
+      playerScore++;
     }
     else {
+      messageSecondLine.textContent = messageSecondLineList[3];
     }
-  }
-  else {
-    console.log("Invalid Input! Moving on to the next round!");
-    return;
-  }
-  if (roundWinner) {
-    console.log(`${roundWinner} won this round!`);
-  }
-  else {
   }
 
+  if (roundWinner === 'You') {
+    messageFirstLine.textContent = messageFirstLineList[0];
+  }
+  else if (roundWinner === 'Computer') {
+    messageFirstLine.textContent = messageFirstLineList[1];
+  }
+  else messageFirstLine.textContent = messageFirstLineList[2];
+
+  // Update the scores
+  const playerScoreDisplay = document.querySelector('.player-score-display');
+  const computerScoreDisplay = document.querySelector('.computer-score-display');
+  playerScoreDisplay.textContent = `Player: ${playerScore}`;
+  computerScoreDisplay.textContent = `Computer: ${computerScore}`;
+
+  if (playerScore === 5) {
+    alert('Congratulations! You are the overall winner!');
+    location.reload();
+  }
+  else if (computerScore === 5) {
+    alert('Sorry! You lost.');
+    location.reload();
+  }
 }
 
-function playGame() {
-  let numOfRounds = 5;
-  for (let i = 0; i < numOfRounds; i++) {
-    let humanChoice = getHumanChoice();
-    let computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
-  }
-  if (humanScore < computerScore) {
-    console.log(`Congratulations! You are the overall winner.`);
-  }
-  else if (humanScore === computerScore) {
-    console.log(`Overall, the game has tied!`);
-  }
-  else console.log(`You lose! Better luck next time.`);
-}
+let choiceButtons = document.querySelectorAll('.choice-buttons button');
+
+choiceButtons.forEach((button) => {
+  button.addEventListener('click', (event) => {
+    const playerChoiceEmoji = button.textContent;
+    const playerChoice = emojiToChoice(playerChoiceEmoji);
+    const computerChoice = getComputerChoice();
+    playRound(playerChoice, computerChoice);
+  });
+})
+
