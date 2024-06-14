@@ -1,9 +1,14 @@
+html {
+  height: 100%;
+}
+
 body {
   display: flex;
   flex-direction: column;
   padding: 0;
   color: white;
   margin: 0;
+  height: 100%;
 }
 
 .heading {
@@ -26,7 +31,7 @@ body {
 
 .body {
   display: flex;
-  height: 695px;
+  flex-grow: 1;
   padding: 20px;
   flex-direction: column;
   justify-content: center;
