@@ -3,6 +3,7 @@ body {
   flex-direction: column;
   padding: 0;
   color: white;
+  margin: 0;
 }
 
 .heading {
@@ -25,7 +26,7 @@ body {
 
 .body {
   display: flex;
-  height: 680px;
+  height: 695px;
   padding: 20px;
   flex-direction: column;
   justify-content: center;
